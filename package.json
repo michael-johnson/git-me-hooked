@@ -1,7 +1,8 @@
 {
   "name": "git-me-hooked",
-  "version": "0.0.1",
   "description": "Manage your git hooks in a language and repository agnostic manner.",
+  "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +11,14 @@
     "hook",
     "hooks",
     "git"
-  ]
+  ],
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/michael-johnson/git-me-hooked.git"
+  },
+  "homepage": "https://gitlab.com/michael-johnson/git-me-hooked",
+  "bugs": {
+    "url": "https://gitlab.com/michael-johnson/git-me-hooked/issues"
+  }
 }
