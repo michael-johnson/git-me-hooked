@@ -4,6 +4,7 @@
   "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
   "version": "0.0.1",
   "main": "index.js",
+  "bin": "./dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p .",
