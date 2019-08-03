@@ -29,5 +29,10 @@ export default class HookManager {
       }
       copyFileSync(join(__dirname, '/HookRunners/', `${hookName}.js`), hookFile);
     });
+
+    const localConfigFile = resolve(join(repositoryPath, 'git-me-hooked.json'));
+    if (!existsSync(localConfigFile)) {
+      copyFileSync(join(__dirname, '/../ConfigTemplates/', 'local.json'), localConfigFile);
+    }
   }
 }
