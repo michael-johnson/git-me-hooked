@@ -1,14 +1,50 @@
 {
   "name": "git-me-hooked",
-  "version": "0.0.1",
   "description": "Manage your git hooks in a language and repository agnostic manner.",
+  "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
+  "version": "0.1.0",
   "main": "index.js",
+  "files": [
+    "ConfigTemplates/*",
+    "dist/*"
+  ],
+  "bin": "./dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p .",
+    "lint": "eslint --ext .js,.ts ./src"
   },
   "keywords": [
     "hook",
     "hooks",
     "git"
-  ]
+  ],
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/michael-johnson/git-me-hooked.git"
+  },
+  "homepage": "https://gitlab.com/michael-johnson/git-me-hooked",
+  "bugs": {
+    "url": "https://gitlab.com/michael-johnson/git-me-hooked/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "devDependencies": {
+    "@types/shelljs": "^0.8.5",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-typescript": "^4.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "husky": "^2.4.1",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "commander": "^2.20.0",
+    "shelljs": "^0.8.3"
+  }
 }
