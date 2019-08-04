@@ -2,8 +2,7 @@
     "scripts": {
         "pre-commit": [
             {
-                "exec": "echo \"hiya\"",
-                "convertWarningsToErrors": false
+                "exec": "echo \"hiya\""
             }
         ]
     }
