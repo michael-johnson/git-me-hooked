@@ -8,15 +8,15 @@ export default class HookManager {
 
   public static init(repositoryPath: string): void {
     const path = normalize(repositoryPath);
-    if (existsSync(path) && HookManager.underGit(path)) {
+    if (existsSync(path) && HookManager.isGitRepo(path)) {
       HookManager.install(path);
     } else {
-      // TODO: handle error case
+      console.log('The given directory is not a git repository.');
     }
   }
 
-  protected static underGit(path: string): boolean {
-    return path.length > 0; // TODO: make this a real check
+  protected static isGitRepo(path: string): boolean {
+    return existsSync(join(path, '.git'));
   }
 
   protected static install(repositoryPath: string): void {
