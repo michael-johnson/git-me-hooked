@@ -21,7 +21,6 @@ export default class HookManager {
   }
 
   public static uninit(repoPath: string): void {
-    console.log('hit uninit fxn');
     const path = normalize(repoPath);
     if (existsSync(path) && existsSync(join(path, 'git-me-hooked.json'))) {
       HookManager.uninstall(path);
@@ -52,14 +51,11 @@ export default class HookManager {
   }
 
   protected static uninstall(repoPath: string): void {
-    console.log('hit uninstall fxn');
     const hooksDir = resolve(join(repoPath, '.git', 'hooks'));
 
     HookManager.hookTypes.forEach(hookName => {
       const hookFile = join(hooksDir, hookName);
       const backupHookFile = join(hooksDir, `${hookName}.git-me-hooked.backup`);
-      console.log('hookFile', hookFile);
-      console.log('backupHookFile', backupHookFile);
       if (existsSync(hookFile) && existsSync(backupHookFile)) {
         unlinkSync(hookFile);
         renameSync(backupHookFile, hookFile);

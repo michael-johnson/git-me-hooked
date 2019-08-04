@@ -24,7 +24,6 @@ cli
   .alias('uninstall')
   .description('Remove git-me-hooked from a repository.')
   .action((repoPath: string) => {
-    console.log('hit uninit cli');
     HookManager.uninit(repoPath);
   });
 

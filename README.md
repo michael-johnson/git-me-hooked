@@ -39,7 +39,7 @@ git-me-hooked init <repoPath>
 
 ## Configuration
 
-A `git-me-hooked.json` file is created in the repositories top directory that defines what scripts are executed for each git hook. An example configuration is created by default:
+A `git-me-hooked.json` file is created in the repository's top directory that defines what scripts are executed for each git hook. An example configuration is created by default:
 ```json
 {
     "scripts": {
@@ -52,11 +52,11 @@ A `git-me-hooked.json` file is created in the repositories top directory that de
 }
 ```
 
-Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be run by the hook runner.
+Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
 
 ## Writing Scripts
 ### General
-* Any non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
+* A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced.
 * The hook runner populates a `GMH_STAGED_FILES` environment variable with a JSON encoded array of the absolute paths of currently staged files.
 
