@@ -4,7 +4,7 @@ import HookManager from './HookManager';
 import HookRunner from './HookRunner';
 
 const cli = new Command();
-const myPackage = require('../package.json'); // TODO: no require here, use a sane loader
+const myPackage = require('../package.json');
 
 cli.version(myPackage.version);
 if (!process.argv.slice(2).length) {
@@ -13,13 +13,20 @@ if (!process.argv.slice(2).length) {
 
 cli
   .command('init <repoPath>')
-  .command('install <repoPath')
+  .alias('install')
   .description('Initialize a repository to use git-me-hooked.')
   .action((repoPath: string) => {
     HookManager.init(repoPath);
   });
 
-cli.command('uninstall <directoryPath>', 'Remove git-me-hooked from a repository.');
+cli
+  .command('uninit <repoPath')
+  .alias('uninstall')
+  .description('Remove git-me-hooked from a repository.')
+  .action((repoPath: string) => {
+    console.log('hit uninit cli');
+    HookManager.uninit(repoPath);
+  });
 
 cli
   .command('exec <repoPath> <hookType>')
