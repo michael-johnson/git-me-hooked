@@ -13,6 +13,7 @@ if (!process.argv.slice(2).length) {
 
 cli
   .command('init <repoPath>')
+  .command('install <repoPath')
   .description('Initialize a repository to use git-me-hooked.')
   .action((repoPath: string) => {
     HookManager.init(repoPath);
