@@ -6,8 +6,8 @@ export default class HookManager {
     'pre-commit',
   ];
 
-  public static init(repositoryPath: string): void {
-    const path = normalize(repositoryPath);
+  public static init(repoPath: string): void {
+    const path = normalize(repoPath);
     if (existsSync(path) && HookManager.isGitRepo(path)) {
       HookManager.install(path);
     } else {
@@ -19,8 +19,8 @@ export default class HookManager {
     return existsSync(join(path, '.git'));
   }
 
-  protected static install(repositoryPath: string): void {
-    const hooksDir = resolve(join(repositoryPath, '.git', 'hooks'));
+  protected static install(repoPath: string): void {
+    const hooksDir = resolve(join(repoPath, '.git', 'hooks'));
 
     HookManager.hookTypes.forEach(hookName => {
       const hookFile = join(hooksDir, hookName);
@@ -30,7 +30,7 @@ export default class HookManager {
       copyFileSync(join(__dirname, '/HookRunners/', `${hookName}.js`), hookFile);
     });
 
-    const localConfigFile = resolve(join(repositoryPath, 'git-me-hooked.json'));
+    const localConfigFile = resolve(join(repoPath, 'git-me-hooked.json'));
     if (!existsSync(localConfigFile)) {
       copyFileSync(join(__dirname, '/../ConfigTemplates/', 'local.json'), localConfigFile);
     }
