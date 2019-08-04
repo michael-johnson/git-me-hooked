@@ -4,6 +4,10 @@
   "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
   "version": "0.0.1",
   "main": "index.js",
+  "files": [
+    "ConfigTemplates/*",
+    "dist/*"
+  ],
   "bin": "./dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
