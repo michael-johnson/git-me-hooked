@@ -10,7 +10,8 @@ A changelog is maintained for this project and is available [here](https://gitla
 
 ## Requirements
 
-* `Node` and `npm` and it's globally installed packages in your PATH.
+* `Node` >= 8
+* `npm` and it's globally installed packages in your PATH.
 * `git` (duh)
 
 

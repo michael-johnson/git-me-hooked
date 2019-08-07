@@ -31,7 +31,8 @@ cli
   .command('exec <repoPath> <hookType>')
   .description('Execute the given repository\'s git hooks of the specified type')
   .action((repoPath: string, hookType: string) => {
-    process.exit(HookRunner.run(repoPath, hookType));
+    const runner = new HookRunner();
+    process.exit(runner.run(repoPath, hookType));
   });
 
 cli.parse(process.argv);

@@ -11,7 +11,7 @@ try {
     .map(file => resolve(normalize(file)));
   env.GMH_STAGED_FILES = JSON.stringify(stagedFiles);
 
-  execSync(`git-me-hooked exec ${join(__dirname, '../../')} pre-commit`, { stdio: 'inherit' });
+  execSync(`git-me-hooked exec ${resolve(join(__dirname, '../../'))} pre-commit`, { stdio: 'inherit' });
 } catch (error) {
   process.exit(error.status);
 }
