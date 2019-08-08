@@ -3,14 +3,15 @@
 Manage your git hooks in a language and repository agnostic manner.
 
 
-## Changelog.
+## Changelog
 
-A changelog is maintained for this project and is available [here](CHANGELOG.md).
+A changelog is maintained for this project and is available [here](https://gitlab.com/michael-johnson/git-me-hooked/blob/develop/CHANGELOG.md).
 
 
 ## Requirements
 
-* `Node` and `npm` and it's globally installed packages in your PATH.
+* `Node` >= 8
+* `npm` and it's globally installed packages in your PATH.
 * `git` (duh)
 
 
@@ -42,6 +43,9 @@ git-me-hooked init <repoPath>
 A `git-me-hooked.json` file is created in the repository's top directory that defines what scripts are executed for each git hook. An example configuration is created by default:
 ```json
 {
+    "includes" [
+        "../some-other-places/more-hooks.json"
+    ],
     "scripts": {
         "pre-commit": [
             {
@@ -52,24 +56,25 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 }
 ```
 
-Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
+* Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
+* Additional hook configuation files can be included by specifiying their relative path in the `includes` array. Each `exec` is always executed from the same directory as the config file it's defined in.
 
 ## Writing Scripts
 ### General
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced.
-* The hook runner populates a `GMH_STAGED_FILES` environment variable with a JSON encoded array of the absolute paths of currently staged files.
+* The hook runner populates a `GMH_STAGED_FILES` environment variable that contains the path of a JSON file with an array of the absolute paths of currently staged files.
+* Pathes in configuration files are always executed relative to the config files path. The `GMH_REPO_DIRECTORY` environment variable will always point to the root of the repo that the hook is currently being executed for.
 
 ### Examples
 #### pre-commit
 ```javascript
 #!/usr/bin/env node
 const process = require('process');
+const fs = require('fs');
 
-// Log all of the currently staged files
-const files = JSON.parse(process.env.GMH_STAGED_FILES);
+const files = JSON.parse(fs.readFileSync(process.env.GMH_STAGED_FILES));
 files.forEach(file => {
     console.log(file);
 });
-
 ```

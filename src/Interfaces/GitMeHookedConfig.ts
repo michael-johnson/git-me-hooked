@@ -8,5 +8,6 @@ interface Command {
 }
 
 interface GitMeHookedConfig {
+  includes?: string[];
   scripts: Scripts;
 }
