@@ -43,7 +43,7 @@ git-me-hooked init <repoPath>
 A `git-me-hooked.json` file is created in the repository's top directory that defines what scripts are executed for each git hook. An example configuration is created by default:
 ```json
 {
-    "includes" [
+    "includes": [
         "../some-other-places/more-hooks.json"
     ],
     "scripts": {
