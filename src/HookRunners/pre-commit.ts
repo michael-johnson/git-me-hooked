@@ -15,14 +15,19 @@ function getStagedFilesJson() {
   return JSON.stringify(stagedFiles);
 }
 
+function getRepoDirectory(): string {
+  return resolve(join(__dirname, '../../'));
+}
+
 function runHooks() {
-  execSync(`git-me-hooked exec ${resolve(join(__dirname, '../../'))} pre-commit`, { stdio: 'inherit' });
+  execSync(`git-me-hooked exec ${getRepoDirectory()} pre-commit`, { stdio: 'inherit' });
 }
 
 try {
   const stagedFilesPath = join(tmpdir(), 'gmh-staged-files.json');
   writeFileSync(stagedFilesPath, getStagedFilesJson());
   env.GMH_STAGED_FILES = stagedFilesPath;
+  env.GMH_REPO_DIRECTORY = getRepoDirectory();
 
   runHooks();
 
