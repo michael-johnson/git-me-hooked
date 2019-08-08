@@ -43,6 +43,9 @@ git-me-hooked init <repoPath>
 A `git-me-hooked.json` file is created in the repository's top directory that defines what scripts are executed for each git hook. An example configuration is created by default:
 ```json
 {
+    "includes" [
+        "../some-other-places/more-hooks.json"
+    ],
     "scripts": {
         "pre-commit": [
             {
@@ -53,7 +56,8 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 }
 ```
 
-Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
+* Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
+* Additional hook configuation files can be included by specifiying their relative path in the `includes` array. Each `exec` is always executed from the same directory as the config file it's defined in.
 
 ## Writing Scripts
 ### General
