@@ -10,7 +10,8 @@ A changelog is maintained for this project and is available [here](https://gitla
 
 ## Requirements
 
-* `Node` and `npm` and it's globally installed packages in your PATH.
+* `Node` >= 8
+* `npm` and it's globally installed packages in your PATH.
 * `git` (duh)
 
 
@@ -59,6 +60,7 @@ Each commit hook name inside of `scripts` is an array of objects that define wha
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced.
 * The hook runner populates a `GMH_STAGED_FILES` environment variable that contains the path of a JSON file with an array of the absolute paths of currently staged files.
+* Pathes in configuration files are always executed relative to the config files path. The `GMH_REPO_DIRECTORY` environment variable will always point to the root of the repo that the hook is currently being executed for.
 
 ### Examples
 #### pre-commit
