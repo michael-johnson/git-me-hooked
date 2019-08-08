@@ -58,18 +58,17 @@ Each commit hook name inside of `scripts` is an array of objects that define wha
 ### General
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced.
-* The hook runner populates a `GMH_STAGED_FILES` environment variable with a JSON encoded array of the absolute paths of currently staged files.
+* The hook runner populates a `GMH_STAGED_FILES` environment variable that contains the path of a JSON file with an array of the absolute paths of currently staged files.
 
 ### Examples
 #### pre-commit
 ```javascript
 #!/usr/bin/env node
 const process = require('process');
+const fs = require('fs');
 
-// Log all of the currently staged files
-const files = JSON.parse(process.env.GMH_STAGED_FILES);
+const files = JSON.parse(fs.readFileSync(process.env.GMH_STAGED_FILES));
 files.forEach(file => {
     console.log(file);
 });
-
 ```

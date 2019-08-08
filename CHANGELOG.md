@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
+* The `GMH_STAGED_FILES` environment variable now contains the path to a JSON file with the array of staged files instead of directly containing the JSON string.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+* The `GMH_STAGED_FILES` environment variable being undefined on Windows when a large number of files are staged.
 
 ### Security
 
