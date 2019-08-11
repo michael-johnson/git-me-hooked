@@ -28,11 +28,13 @@ export default class HookRunner {
   }
 
   protected getIncludes(repoConfig: GitMeHookedConfig, currentPath: string, hookType: string) {
-    const { includes } = repoConfig;
+    const { includes, scripts } = repoConfig;
     chdir(currentPath);
 
-    const commands = repoConfig.scripts[hookType];
-    this.commands[currentPath] = commands;
+    if (scripts != null) {
+      const commands = scripts[hookType];
+      this.commands[currentPath] = commands;
+    }
 
     if (includes != null) {
       Object.values(includes).forEach(include => {

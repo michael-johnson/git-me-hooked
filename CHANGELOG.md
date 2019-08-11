@@ -19,6 +19,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 
+## [0.3.0] 2019-08-11
+
+### Added
+* The `GMH_STAGED_FILES` JSON file is cleaned up if an error happens executing a hook.
+
+### Changed
+* Updated git command for retrieving staged files for `GMH_STAGED_FILES` to `git diff`.
+
+### Fixed
+* The hook runner crashing if a config file didn't have a `scripts` field.
+
+
 ## [0.2.0] 2019-08-07
 
 ### Added
