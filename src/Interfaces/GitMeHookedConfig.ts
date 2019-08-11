@@ -4,10 +4,9 @@ interface Scripts {
 
 interface Command {
   exec: string;
-  convertWarningsToErrors?: boolean;
 }
 
 interface GitMeHookedConfig {
   includes?: string[];
-  scripts: Scripts;
+  scripts?: Scripts;
 }
