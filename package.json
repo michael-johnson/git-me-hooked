@@ -26,7 +26,8 @@
   },
   "homepage": "https://gitlab.com/michael-johnson/git-me-hooked",
   "bugs": {
-    "url": "https://gitlab.com/michael-johnson/git-me-hooked/issues"
+    "url": "https://gitlab.com/michael-johnson/git-me-hooked/issues",
+    "email": "incoming+michael-johnson-git-me-hooked-12945107-issue-@incoming.gitlab.com"
   },
   "husky": {
     "hooks": {
