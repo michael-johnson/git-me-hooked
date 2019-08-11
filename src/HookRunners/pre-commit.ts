@@ -6,7 +6,7 @@ import { tmpdir } from 'os';
 import { env } from 'process';
 
 function getStagedFilesJson() {
-  const rawStagedFiles = execSync('git ls-files --cached', { encoding: 'utf-8' });
+  const rawStagedFiles = execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf-8' });
   const stagedFiles = rawStagedFiles
     .slice(0, -1)
     .split('\n')
