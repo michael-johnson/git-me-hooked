@@ -23,15 +23,20 @@ function runHooks() {
   execSync(`git-me-hooked exec ${getRepoDirectory()} pre-commit`, { stdio: 'inherit' });
 }
 
+function cleanUp(stagedFilesPath: string) {
+  unlinkSync(stagedFilesPath);
+}
+
+const stagedFilesPath = join(tmpdir(), 'gmh-staged-files.json');
 try {
-  const stagedFilesPath = join(tmpdir(), 'gmh-staged-files.json');
   writeFileSync(stagedFilesPath, getStagedFilesJson());
   env.GMH_STAGED_FILES = stagedFilesPath;
   env.GMH_REPO_DIRECTORY = getRepoDirectory();
 
   runHooks();
 
-  unlinkSync(stagedFilesPath);
+  cleanUp(stagedFilesPath);
 } catch (error) {
+  cleanUp(stagedFilesPath);
   process.exit(error.status);
 }
