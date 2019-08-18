@@ -15,7 +15,7 @@ function getStagedFilesJson() {
   return JSON.stringify(stagedFiles);
 }
 
-function getRepoDirectory(): string {
+function getRepoDirectory() {
   return resolve(join(__dirname, '../../'));
 }
 
@@ -23,7 +23,7 @@ function runHooks() {
   execSync(`git-me-hooked exec ${getRepoDirectory()} pre-commit`, { stdio: 'inherit' });
 }
 
-function cleanUp(stagedFilesPath: string) {
+function cleanUp(stagedFilesPath) {
   unlinkSync(stagedFilesPath);
 }
 
