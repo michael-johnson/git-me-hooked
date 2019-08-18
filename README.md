@@ -1,8 +1,5 @@
 # Git Me Hooked
 
-[![pipeline status](https://gitlab.com/michael-johnson/git-me-hooked/badges/develop/pipeline.svg)](https://gitlab.com/michael-johnson/git-me-hooked/commits/develop) 
-[![coverage report](https://gitlab.com/michael-johnson/git-me-hooked/badges/develop/coverage.svg)](https://gitlab.com/michael-johnson/git-me-hooked/commits/develop)
-
 Manage your git hooks in a language and repository agnostic manner.
 
 
