@@ -1,0 +1,20 @@
+image: "node:8-alpine"
+
+before_script:
+   - apk add 'git=~2'
+   - npm install
+
+lint:
+  script:
+    - npm run lint
+
+build:
+  script:
+    - npm run build
+
+test:
+  script:
+    - node --version
+    - npm --version
+    - git --version
+    - npm run test
