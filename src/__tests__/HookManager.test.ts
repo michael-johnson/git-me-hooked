@@ -8,7 +8,7 @@ import rimraf from 'rimraf';
 import HookManager from '../HookManager';
 
 const tempRepoPath = join(tmpdir(), 'gmh-test-repo');
-const hookRunnersDir = join(__dirname, '../HookRunners/');
+const hookTemplatePath = join(__dirname, '../hookTemplate.ts');
 
 beforeAll(() => {
   // Setup empty git repo for testing
@@ -24,6 +24,7 @@ it('init copies hooks', () => {
 
   // Assert
   const installedPreCommitHook = readFileSync(join(tempRepoPath, '.git', 'hooks', 'pre-commit'), { encoding: 'utf-8' });
-  const preCommitHookRunner = readFileSync(join(hookRunnersDir, 'pre-commit.js'), { encoding: 'utf-8' });
+  const hookTemplate = readFileSync(hookTemplatePath, { encoding: 'utf-8' });
+  const preCommitHookRunner = hookTemplate.replace('%%_HOOK_NAME_%%', 'pre-commit');
   expect(installedPreCommitHook).toEqual(preCommitHookRunner);
 });
