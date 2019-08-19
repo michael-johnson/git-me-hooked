@@ -13,6 +13,8 @@ import { tmpdir } from 'os';
 export default class HookManager {
   protected static hookTypes = [
     'pre-commit',
+    'pre-push',
+    'commit-msg',
   ];
 
   public static init(repoPath: string): void {
