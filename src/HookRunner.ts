@@ -29,8 +29,7 @@ export default class HookRunner {
       chdir(path);
       const commands = this.commands[key];
       commands.forEach(command => {
-        const res = exec(command.exec);
-        if (res.code !== 0) {
+        if (exec(command.exec).code !== 0) {
           responseCode = 1;
         }
       });
