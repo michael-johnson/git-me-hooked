@@ -1,7 +1,15 @@
-import { readFileSync } from 'fs';
+import {
+  readFileSync,
+  mkdirSync,
+  existsSync,
+  readdirSync,
+  unlinkSync,
+} from 'fs';
 import { join, parse, resolve } from 'path';
 import { exec } from 'shelljs';
 import { chdir } from 'process';
+import HookVariableInitializer from './HookVariableInitializer';
+import HookManager from './HookManager';
 
 export default class HookRunner {
   protected commands: ExecConfig = {};
@@ -9,6 +17,9 @@ export default class HookRunner {
   public run(repoPath: string, hookType: string): number {
     let responseCode = 0;
     this.commands = {};
+
+    HookRunner.initTempDirectory();
+    HookVariableInitializer.initEnvVariables(repoPath, hookType);
 
     const repoConfig = HookRunner.readConfigFile(join(repoPath, 'git-me-hooked.json'));
     this.getIncludes(repoConfig, repoPath, hookType);
@@ -24,7 +35,25 @@ export default class HookRunner {
       });
     });
 
+    HookRunner.cleanTempDirectory();
+
     return responseCode;
+  }
+
+  protected static initTempDirectory(): void {
+    if (!existsSync(HookManager.getTempDirectory())) {
+      mkdirSync(HookManager.getTempDirectory());
+    }
+  }
+
+  protected static cleanTempDirectory(): void {
+    const tempDirectory = HookManager.getTempDirectory();
+    if (existsSync(tempDirectory)) {
+      const files = readdirSync(tempDirectory);
+      files.forEach(file => {
+        unlinkSync(join(tempDirectory, file));
+      });
+    }
   }
 
   protected getIncludes(repoConfig: GitMeHookedConfig, currentPath: string, hookType: string) {

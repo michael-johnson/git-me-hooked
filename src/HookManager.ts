@@ -5,6 +5,7 @@ import {
   unlinkSync,
 } from 'fs';
 import { normalize, join, resolve } from 'path';
+import { tmpdir } from 'os';
 
 export default class HookManager {
   protected static hookTypes = [
@@ -27,6 +28,10 @@ export default class HookManager {
     } else {
       console.log('The given directory does not have a git-me-hooked.json file in it.');
     }
+  }
+
+  public static getTempDirectory(): string {
+    return join(tmpdir(), 'git-me-hooked');
   }
 
   protected static isGitRepo(path: string): boolean {
