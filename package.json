@@ -2,7 +2,7 @@
   "name": "git-me-hooked",
   "description": "Manage your git hooks in a language and repository agnostic manner.",
   "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "index.js",
   "files": [
     "ConfigTemplates/*",
@@ -10,7 +10,7 @@
   ],
   "bin": "./dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsc -p .",
     "lint": "eslint --ext .js,.ts ./src"
   },
@@ -26,7 +26,8 @@
   },
   "homepage": "https://gitlab.com/michael-johnson/git-me-hooked",
   "bugs": {
-    "url": "https://gitlab.com/michael-johnson/git-me-hooked/issues"
+    "url": "https://gitlab.com/michael-johnson/git-me-hooked/issues",
+    "email": "incoming+michael-johnson-git-me-hooked-12945107-issue-@incoming.gitlab.com"
   },
   "husky": {
     "hooks": {
@@ -34,13 +35,19 @@
     }
   },
   "devDependencies": {
+    "@types/jest": "^24.0.17",
+    "@types/rimraf": "^2.0.2",
     "@types/shelljs": "^0.8.5",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-typescript": "^4.0.0",
     "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.15.1",
     "husky": "^2.4.1",
+    "jest": "^24.9.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.2"
   },
   "dependencies": {
