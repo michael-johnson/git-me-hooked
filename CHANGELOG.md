@@ -19,6 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 
+## [0.4.0] 2019-08-19
+
+### Added
+* Support for `pre-push` and `commit-msg` hooks scripts.
+* The `GMH_GIT_ARGUMENTS` environment variable that contains arguments git called the hook with.
+* The `GMH_RUNNING` environment variable which is always populated when executing a commit hook, to provide an easy way to programmatically check if a hook script is executed by git-me-hooked.
+
+
 ## [0.3.0] 2019-08-11
 
 ### Added
