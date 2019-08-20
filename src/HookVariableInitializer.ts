@@ -5,22 +5,24 @@ import { exec } from 'shelljs';
 import HookManager from './HookManager';
 
 export default class HookVariableInitializer {
-  public static initEnvVariables(repoPath: string, hookType: string) {
+  public static initEnvVariables(repoPath: string, hookType: string, hookArguments: string[]) {
+    env.GMH_REPO_DIRECTORY = repoPath;
+    env.GMH_GIT_ARGUMENTS = hookArguments.join(' ');
+
     switch (hookType) {
       case 'pre-commit':
-        HookVariableInitializer.initPreCommitVars(repoPath);
+        HookVariableInitializer.initPreCommitVars();
         break;
       default:
         break;
     }
   }
 
-  protected static initPreCommitVars(repoPath: string) {
+  protected static initPreCommitVars() {
     const stagedFilesPath = join(HookManager.getTempDirectory(), 'staged-files.json');
     writeFileSync(stagedFilesPath, HookVariableInitializer.getStagedFilesJson());
 
     env.GMH_STAGED_FILES = stagedFilesPath;
-    env.GMH_REPO_DIRECTORY = repoPath;
   }
 
   protected static getStagedFilesJson() {

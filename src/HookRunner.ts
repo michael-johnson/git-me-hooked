@@ -14,12 +14,12 @@ import HookManager from './HookManager';
 export default class HookRunner {
   protected commands: ExecConfig = {};
 
-  public run(repoPath: string, hookType: string): number {
+  public run(repoPath: string, hookType: string, hookArguments: string[]): number {
     let responseCode = 0;
     this.commands = {};
 
     HookRunner.initTempDirectory();
-    HookVariableInitializer.initEnvVariables(repoPath, hookType);
+    HookVariableInitializer.initEnvVariables(repoPath, hookType, hookArguments);
 
     const repoConfig = HookRunner.readConfigFile(join(repoPath, 'git-me-hooked.json'));
     this.getIncludes(repoConfig, repoPath, hookType);
@@ -63,8 +63,8 @@ export default class HookRunner {
     if (scripts != null) {
       const commands = scripts[hookType];
       if (commands != null) {
-      this.commands[currentPath] = commands;
-    }
+        this.commands[currentPath] = commands;
+      }
     }
 
     if (includes != null) {
