@@ -35,7 +35,7 @@ Use git and enjoy
 ## Limitations
 
 * It is not possible to use `git-me-hooked` in conjunction with git hooks not executed by `git-me-hooked`. Any existing git hooks are backed up on `init` and are restored on `uninstall`.
-* Currently the only supported hook type is `pre-commit`. More will be added as development continues.
+* Currently the only supported hook types are `pre-commit`, `commit-msg`, and `pre-push`. More will be added as development continues.
 
 
 ## Configuration
@@ -59,15 +59,35 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 * Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
 * Additional hook configuration files can be included by specifying their relative path in the `includes` array. Each `exec` is always executed from the same directory as the config file it's defined in.
 
+
 ## Writing Scripts
+
 ### General
+
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced.
-* The hook runner populates a `GMH_STAGED_FILES` environment variable that contains the path of a JSON file with an array of the absolute paths of currently staged files.
-* Paths in configuration files are always executed relative to the config files path. The `GMH_REPO_DIRECTORY` environment variable will always point to the root of the repo that the hook is currently being executed for.
+* Paths in configuration files are always executed relative to the config files path. 
+* Hook script arguments are not likely to be in the same position as if the script was called directly by git. Prefer using `GMH_STAGED_FILES` to retrieve arguments from git.
+
+### Environment Variables
+
+A handful of environment variables are populated by the hook runner to make writing scripts easier.
+
+#### Global
+
+* `GMH_RUNNING`: this is a simple flag that contains the string 'true' that is set anytime git-me-hooked is executing a git hook.
+* `GMH_GIT_ARGUMENTS`: contains a list of space separated arguments that git called the hook with.
+* `GMH_REPO_DIRECTORY`: a path that points to the root of the repo that the hook is currently being executed for.
+
+#### Pre-commit
+
+* `GMH_STAGED_FILES`: contains the path of a JSON file with an array of the absolute paths of currently staged files.
+
 
 ### Examples
-#### pre-commit
+
+#### Pre-commit
+
 ```javascript
 #!/usr/bin/env node
 const process = require('process');
