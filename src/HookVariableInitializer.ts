@@ -6,6 +6,7 @@ import HookManager from './HookManager';
 
 export default class HookVariableInitializer {
   public static initEnvVariables(repoPath: string, hookType: string, hookArguments: string[]) {
+    env.GMH_RUNNING = 'true';
     env.GMH_REPO_DIRECTORY = repoPath;
     env.GMH_GIT_ARGUMENTS = hookArguments.join(' ');
 
