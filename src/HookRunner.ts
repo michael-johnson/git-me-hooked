@@ -62,7 +62,9 @@ export default class HookRunner {
 
     if (scripts != null) {
       const commands = scripts[hookType];
+      if (commands != null) {
       this.commands[currentPath] = commands;
+    }
     }
 
     if (includes != null) {
