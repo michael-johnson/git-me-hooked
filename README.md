@@ -68,7 +68,7 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced by default, but can be by adding `silence: true` to the hook's entry in the `scripts` config.
 * Paths in configuration files are always executed relative to the config files path. 
-* Hook script arguments are not likely to be in the same position as if the script was called directly by git. Prefer using `GMH_STAGED_FILES` to retrieve arguments from git.
+* Hook script arguments are not guaranteed to be in the same position as if the script was called directly by git. Prefer using `GMH_GIT_ARGUMENTS` to retrieve arguments from git.
 
 ### Environment Variables
 
