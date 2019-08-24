@@ -4,6 +4,8 @@ interface Scripts {
 
 interface Command {
   exec: string;
+  name?: string;
+  silence?: boolean;
 }
 
 interface GitMeHookedConfig {
