@@ -2,7 +2,7 @@
   "name": "git-me-hooked",
   "description": "Manage your git hooks in a language and repository agnostic manner.",
   "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "index.js",
   "files": [
     "ConfigTemplates/*",
