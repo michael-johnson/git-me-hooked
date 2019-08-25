@@ -19,6 +19,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 
+## [0.5.0] 2019-08-25
+
+### Added
+* Pretty spinners to show the status of running hooks from the command line.
+* New optional fields to configure individual hook scripts: `silence` to suppress the script's output to stdout and stderr, and `name` to give the script a friendly name to display in the CLI.
+
+### Changed
+* Hook scripts now run asynchronously, improving performance.
+
+### Fixed
+* Readme referring to wrong environment variable for git arguments.
+
+
 ## [0.4.0] 2019-08-19
 
 ### Added
