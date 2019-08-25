@@ -2,7 +2,7 @@
   "name": "git-me-hooked",
   "description": "Manage your git hooks in a language and repository agnostic manner.",
   "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "index.js",
   "files": [
     "ConfigTemplates/*",
@@ -31,7 +31,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint",
+      "pre-push": "npm t"
     }
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "commander": "^2.20.0",
+    "ora": "^3.4.0",
     "shelljs": "^0.8.3"
   }
 }

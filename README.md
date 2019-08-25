@@ -49,6 +49,7 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
     "scripts": {
         "pre-commit": [
             {
+                "name": "Say hiya",
                 "exec": "echo \"hiya\""
             }
         ]
@@ -56,7 +57,7 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 }
 ```
 
-* Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner.
+* Each commit hook name inside of `scripts` is an array of objects that define what is executed when that hook is triggered. Each object in the array has an `exec` field that is the shell command that will be executed by the hook runner. There is also an optional `name` field that the CLI will use when displaying results if it is provided.
 * Additional hook configuration files can be included by specifying their relative path in the `includes` array. Each `exec` is always executed from the same directory as the config file it's defined in.
 
 
@@ -65,9 +66,9 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 ### General
 
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
-* Output to stdout and stderr is not silenced.
+* Output to stdout and stderr is not silenced by default, but can be by adding `silence: true` to the hook's entry in the `scripts` config.
 * Paths in configuration files are always executed relative to the config files path. 
-* Hook script arguments are not likely to be in the same position as if the script was called directly by git. Prefer using `GMH_STAGED_FILES` to retrieve arguments from git.
+* Hook script arguments are not guaranteed to be in the same position as if the script was called directly by git. Prefer using `GMH_GIT_ARGUMENTS` to retrieve arguments from git.
 
 ### Environment Variables
 
