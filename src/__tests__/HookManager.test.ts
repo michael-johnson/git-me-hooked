@@ -1,10 +1,7 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { chdir } from 'process';
-import { exec } from 'shelljs';
-import rimraf from 'rimraf';
-
+import { initEmptyGitRepo } from './utils';
 import HookManager from '../HookManager';
 import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from '../strings/errors';
 
@@ -13,16 +10,8 @@ const hookTemplatePath = join(__dirname, '../hookTemplate.ts');
 
 jest.spyOn(global.console, 'log').mockImplementation(() => {});
 
-const cleanUp = () => {
-  // Setup empty git repo for testing
-  rimraf.sync(tempRepoPath);
-  mkdirSync(tempRepoPath);
-  chdir(tempRepoPath);
-  exec('git init');
-};
-
 beforeAll(() => {
-  cleanUp();
+  initEmptyGitRepo(tempRepoPath);
 });
 
 
@@ -76,7 +65,7 @@ it('uninit gives error if not git repo', () => {
 
 it('uninit gives error if git repo, but not initialized by GMH', () => {
   // Arrange
-  cleanUp();
+  initEmptyGitRepo(tempRepoPath);
 
   // Act
   HookManager.uninit(tempRepoPath);
