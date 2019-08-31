@@ -31,11 +31,15 @@ export default class HookVariableInitializer {
       'git diff --cached --name-only --diff-filter=ACM',
       { silent: true },
     );
-    const stagedFiles = rawStagedFiles
-      .slice(0, -1)
-      .split('\n')
-      .map(file => resolve(normalize(file)));
+    if (rawStagedFiles.length > 0) {
+      const stagedFiles = rawStagedFiles
+        .slice(0, -1)
+        .split('\n')
+        .map(file => resolve(normalize(file)));
 
-    return JSON.stringify(stagedFiles);
+      return JSON.stringify(stagedFiles);
+    }
+
+    return JSON.stringify([]);
   }
 }
