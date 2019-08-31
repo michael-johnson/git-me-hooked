@@ -2,15 +2,22 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { exec } from 'shelljs';
-import { initEmptyGitRepo } from './utils';
+import { initEmptyGitRepo, deleteDirectory } from './utils';
 import HookVariableInitializer from '../HookVariableInitializer';
+import TempDirectory from '../TempDirectory';
 
 const tempRepoPath = join(tmpdir(), 'gmh-test-repo');
 
 jest.spyOn(global.console, 'log').mockImplementation(() => {});
 
-beforeAll(() => {
+beforeEach(() => {
+  TempDirectory.init();
   initEmptyGitRepo(tempRepoPath);
+});
+
+afterEach(() => {
+  TempDirectory.remove();
+  deleteDirectory(tempRepoPath);
 });
 
 it('GMH_RUNNING is always set', () => {
@@ -47,7 +54,6 @@ it('GMH_GIT_ARGUMENTS has arguments if passed', () => {
 
 it('GMH_GIT_ARGUMENTS has correct contents if nothing staged', () => {
   // Arrange
-  initEmptyGitRepo(tempRepoPath);
   const fileAPath = join(tempRepoPath, 'fileA');
   writeFileSync(fileAPath, 'some data in A');
   const fileBPath = join(tempRepoPath, 'fileB');
@@ -64,7 +70,6 @@ it('GMH_GIT_ARGUMENTS has correct contents if nothing staged', () => {
 
 it('GMH_GIT_ARGUMENTS has correct contents if all staged', () => {
   // Arrange
-  initEmptyGitRepo(tempRepoPath);
   const fileAPath = join(tempRepoPath, 'fileA');
   writeFileSync(fileAPath, 'some data in A');
   const fileBPath = join(tempRepoPath, 'fileB');
@@ -82,7 +87,6 @@ it('GMH_GIT_ARGUMENTS has correct contents if all staged', () => {
 
 it('GMH_GIT_ARGUMENTS has correct contents if some staged', () => {
   // Arrange
-  initEmptyGitRepo(tempRepoPath);
   const fileAPath = join(tempRepoPath, 'fileA');
   writeFileSync(fileAPath, 'some data in A');
   const fileBPath = join(tempRepoPath, 'fileB');

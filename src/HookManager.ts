@@ -8,7 +8,6 @@ import {
   chmodSync,
 } from 'fs';
 import { normalize, join, resolve } from 'path';
-import { tmpdir } from 'os';
 import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from './strings/errors';
 
 export default class HookManager {
@@ -34,10 +33,6 @@ export default class HookManager {
     } else {
       console.log(ERROR_NOT_INITIALIZED);
     }
-  }
-
-  public static getTempDirectory(): string {
-    return join(tmpdir(), 'git-me-hooked');
   }
 
   protected static isGitRepo(path: string): boolean {

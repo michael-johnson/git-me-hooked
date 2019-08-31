@@ -2,7 +2,7 @@ import { join, normalize, resolve } from 'path';
 import { writeFileSync } from 'fs';
 import { env } from 'process';
 import { exec } from 'shelljs';
-import HookManager from './HookManager';
+import TempDirectory from './TempDirectory';
 
 export default class HookVariableInitializer {
   public static initEnvVariables(repoPath: string, hookType: string, hookArguments: string[]) {
@@ -20,7 +20,7 @@ export default class HookVariableInitializer {
   }
 
   protected static initPreCommitVars() {
-    const stagedFilesPath = join(HookManager.getTempDirectory(), 'staged-files.json');
+    const stagedFilesPath = join(TempDirectory.getPath(), 'staged-files.json');
     writeFileSync(stagedFilesPath, HookVariableInitializer.getStagedFilesJson());
 
     env.GMH_STAGED_FILES = stagedFilesPath;

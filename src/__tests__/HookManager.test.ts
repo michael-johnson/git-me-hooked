@@ -1,19 +1,25 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { initEmptyGitRepo } from './utils';
+import { initEmptyGitRepo, deleteDirectory } from './utils';
 import HookManager from '../HookManager';
 import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from '../strings/errors';
+import TempDirectory from '../TempDirectory';
 
 const tempRepoPath = join(tmpdir(), 'gmh-test-repo');
 const hookTemplatePath = join(__dirname, '../hookTemplate.ts');
 
 jest.spyOn(global.console, 'log').mockImplementation(() => {});
 
-beforeAll(() => {
+beforeEach(() => {
+  TempDirectory.init();
   initEmptyGitRepo(tempRepoPath);
 });
 
+afterEach(() => {
+  TempDirectory.remove();
+  deleteDirectory(tempRepoPath);
+});
 
 it('init copies hooks', () => {
   // Act
