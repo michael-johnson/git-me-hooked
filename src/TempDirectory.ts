@@ -4,6 +4,7 @@ import {
   mkdirSync,
   readdirSync,
   unlinkSync,
+  rmdirSync,
 } from 'fs';
 import { join } from 'path';
 
@@ -25,6 +26,7 @@ export default class TempDirectory {
       files.forEach(file => {
         unlinkSync(join(tempDirectory, file));
       });
+      rmdirSync(tempDirectory);
     }
   }
 }
