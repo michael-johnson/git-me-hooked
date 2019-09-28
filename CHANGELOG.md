@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * The `GMH_STAGED_FILES` environment variable containing the path to the repo instead of an empty array if no files are staged.
+* The `includes` not being applied if the included config file is in the top directory of the repository that GMH is running in.
 
 ### Security
 
