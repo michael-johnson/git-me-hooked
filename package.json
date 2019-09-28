@@ -10,7 +10,7 @@
   ],
   "bin": "./dist/app.js",
   "scripts": {
-    "test": "jest --run-in-band",
+    "test": "jest --run-in-band --silent",
     "build": "tsc -p .",
     "lint": "eslint --ext .js,.ts ./src"
   },
