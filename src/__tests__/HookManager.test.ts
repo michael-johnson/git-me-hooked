@@ -32,6 +32,18 @@ it('init copies hooks', () => {
   expect(installedPreCommitHook).toEqual(preCommitHookRunner);
 });
 
+it('init doesn\'t overwrite git-me-hooked.json if it exists', () => {
+  // Arrange
+  writeFileSync(join(tempRepoPath, 'git-me-hooked.json'), 'this was here before');
+
+  // Act
+  HookManager.init(tempRepoPath);
+
+  // Assert
+  const gitMeHookedJson = readFileSync(join(tempRepoPath, 'git-me-hooked.json'), { encoding: 'utf-8' });
+  expect(gitMeHookedJson).toEqual('this was here before');
+});
+
 it('init gives error if not git repo', () => {
   // Arrange
   const nonRepoPath = join(tmpdir(), 'gmh-not-a-repo');
