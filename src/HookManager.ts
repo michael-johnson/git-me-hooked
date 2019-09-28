@@ -8,7 +8,7 @@ import {
   chmodSync,
 } from 'fs';
 import { normalize, join, resolve } from 'path';
-import { tmpdir } from 'os';
+import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from './strings/errors';
 
 export default class HookManager {
   protected static hookTypes = [
@@ -22,7 +22,7 @@ export default class HookManager {
     if (existsSync(path) && HookManager.isGitRepo(path)) {
       HookManager.install(path);
     } else {
-      console.log('The given directory is not a git repository.');
+      console.log(ERROR_NOT_GIT_REPO);
     }
   }
 
@@ -31,12 +31,8 @@ export default class HookManager {
     if (existsSync(path) && existsSync(join(path, 'git-me-hooked.json'))) {
       HookManager.uninstall(path);
     } else {
-      console.log('The given directory does not have a git-me-hooked.json file in it.');
+      console.log(ERROR_NOT_INITIALIZED);
     }
-  }
-
-  public static getTempDirectory(): string {
-    return join(tmpdir(), 'git-me-hooked');
   }
 
   protected static isGitRepo(path: string): boolean {
@@ -64,6 +60,7 @@ export default class HookManager {
 
   private static getHookTemplate() {
     let hookTemplatePath;
+    /* istanbul ignore if: The tests execute .ts files not .js */
     if (existsSync(join(__dirname, 'hookTemplate.js'))) {
       hookTemplatePath = join(__dirname, 'hookTemplate.js');
     } else {
