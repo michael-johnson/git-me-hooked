@@ -9,7 +9,7 @@ module.exports = {
   },
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{ts,js}'],
-  coveragePathIgnorePatterns: ['src/__tests__/'],
+  coveragePathIgnorePatterns: ['src/__tests__/', 'src/hookTemplate.ts'],
   coverageReporters: ['text-summary', 'lcov'],
   // coverageThreshold: {
   //   global: {
