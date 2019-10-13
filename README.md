@@ -12,7 +12,7 @@ A changelog is maintained for this project and is available [here](https://gitla
 
 * `Node` >= 8
 * `npm` and it's globally installed packages in your PATH.
-* `git` (duh)
+* `git` >= 2.0.0 (duh)
 
 
 ## Usage

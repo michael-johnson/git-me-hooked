@@ -16,24 +16,13 @@ Lint:
 Build:
   script: npm run build
 
-"Test: node 8, git 1":
-  image: "node:8.16.2-jessie"
-  before_script:
-    - apt-cache madison git
-    - apt-get install git=1.9.1
-    - node --version
-    - npm --version
-    - git --version
-    - npm ci
+"Test: node 8":
   script: npm run test
 
-"Test: node 8, git 2":
-  script: npm run test
-
-"Test: node 10, git 2":
+"Test: node 10":
   image: "node:10-alpine"
   script: npm run test
 
-"Test: Node 12, git 2":
+"Test: node 12":
   image: "node:12-alpine"
   script: npm run test
