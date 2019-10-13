@@ -17,10 +17,10 @@ Build:
   script: npm run build
 
 "Test: node 8, git 1":
-  image: "ubuntu:18.04"
+  image: "node:8.16.2-jessie"
   before_script:
     - apt-cache madison git
-    - sudo apt-get install git=1.9.1
+    - apt-get install git=1.9.1
     - node --version
     - npm --version
     - git --version
