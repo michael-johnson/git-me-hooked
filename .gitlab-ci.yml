@@ -16,13 +16,13 @@ Lint:
 Build:
   script: npm run build
 
-"Test - node 8":
+Test-node-8:
   script: npm run test
 
-"Test - node 10":
+Test-node-10:
   image: "node:10-alpine"
   script: npm run test
 
-"Test - node 12":
+Test-node-12:
   image: "node:12-alpine"
   script: npm run test
