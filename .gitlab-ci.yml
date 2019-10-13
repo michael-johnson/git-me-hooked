@@ -1,28 +1,37 @@
-image: "node:8-alpine"
+default:
+  image: "node:8-alpine"
+  before_script:
+    - apk add 'git=~2'
+    - node --version
+    - npm --version
+    - git --version
+    - npm ci
 
-before_script:
-   - apk add 'git=~2'
-   - node --version
-   - npm --version
-   - git --version
-   - npm ci
-
-audit:
+Audit:
   script: npm audit
 
-lint:
+Lint:
   script: npm run lint
 
-build8:
+Build:
   script: npm run build
 
-build10:
+"Test: node 8, git 1":
+  before_script:
+    - apk add 'git=~1'
+    - node --version
+    - npm --version
+    - git --version
+    - npm ci
+  script: npm run test
+
+"Test: node 8, git 2":
+  script: npm run test
+
+"Test: node 10, git 2":
   image: "node:10-alpine"
-  script: npm run build
+  script: npm run test
 
-build12:
+"Test: Node 12, git 2":
   image: "node:12-alpine"
-  script: npm run build
-
-test:
   script: npm run test
