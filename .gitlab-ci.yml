@@ -4,15 +4,25 @@ before_script:
    - apk add 'git=~2'
    - npm ci
 
+stages:
+  - static-checks
+  - build
+  - tests
+
+audit:
+  stage: static-checks
+  script: npm audit
+
 lint:
-  script:
-    - npm run lint
+  stage: static-checks
+  script: npm run lint
 
 build:
-  script:
-    - npm run build
+  stage: build
+  script: npm run build
 
 test:
+  stage: tests
   script:
     - node --version
     - npm --version
