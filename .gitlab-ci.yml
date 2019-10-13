@@ -4,13 +4,14 @@ before_script:
    - apk add 'git=~2'
    - npm ci
 
+audit:
+  script: npm audit
+
 lint:
-  script:
-    - npm run lint
+  script: npm run lint
 
 build:
-  script:
-    - npm run build
+  script: npm run build
 
 test:
   script:
