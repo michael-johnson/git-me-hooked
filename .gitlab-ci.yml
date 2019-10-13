@@ -2,6 +2,9 @@ image: "node:8-alpine"
 
 before_script:
    - apk add 'git=~2'
+   - node --version
+   - npm --version
+   - git --version
    - npm ci
 
 audit:
@@ -10,12 +13,16 @@ audit:
 lint:
   script: npm run lint
 
-build:
+build8:
+  script: npm run build
+
+build10:
+  image: "node:10-alpine"
+  script: npm run build
+
+build12:
+  image: "node:12-alpine"
   script: npm run build
 
 test:
-  script:
-    - node --version
-    - npm --version
-    - git --version
-    - npm run test
+  script: npm run test
