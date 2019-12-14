@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * The `includes` not being applied if the included config file is in the top directory of the repository that GMH is running in.
 
 ### Security
+* Resolved known security vulnerabilities ([1300](https://www.npmjs.com/advisories/1300), [1316](https://www.npmjs.com/advisories/1316), [1324](https://www.npmjs.com/advisories/1324), [1325](https://www.npmjs.com/advisories/1325)) in `handlerbars` dependency (down stream dependency of `jest`).
 
 
 ## [0.5.0] 2019-08-25
@@ -74,4 +75,4 @@ Initial MVP release.
 
 
 ## [0.0.1] 2019-06-19
-Initial release to preserve package name. Zero functionality.
+Initial release to preserve package name. Zero functionality. 
