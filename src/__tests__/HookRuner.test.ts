@@ -250,3 +250,62 @@ it('pre-commit with silenced scripts writing to stdout and stderr suppresses out
   expect(global.console.log).toBeCalledTimes(1);
   expect(process.stderr.write).toBeCalledWith(expect.stringContaining('hooks passed.'));
 });
+
+it('pre-commit with no config set gives empty environment variable', async () => {
+  // Arrange
+  const config = '{}';
+  writeFileSync(
+    join(tempRepoPath, 'git-me-hooked.json'),
+    `{
+      "scripts": {
+        "pre-commit": [
+          {
+            "exec": "node -e \\"process.stdout.write(fs.readFileSync(process.env.GMH_SCRIPT_CONFIG_PATH, { encoding: 'utf8' }));\\""
+          }
+        ]
+      }
+    }`,
+  );
+
+  // Act
+  const runner = new HookRunner();
+  const responseCode = await runner.run(tempRepoPath, 'pre-commit', []);
+
+  // Assert
+  expect(responseCode).toEqual(0);
+  expect(global.console.log).toBeCalledWith(config);
+});
+
+it('pre-commit with config set config environment variable', async () => {
+  // Arrange
+  const config = JSON.stringify({
+    a: 1,
+    b: 2,
+    c: true,
+    d: {
+      e: false,
+      f: 'some string',
+    },
+  });
+  writeFileSync(
+    join(tempRepoPath, 'git-me-hooked.json'),
+    `{
+      "scripts": {
+        "pre-commit": [
+          {
+            "exec": "node -e \\"process.stdout.write(fs.readFileSync(process.env.GMH_SCRIPT_CONFIG_PATH, { encoding: 'utf8' }));\\"",
+            "config": ${config}
+          }
+        ]
+      }
+    }`,
+  );
+
+  // Act
+  const runner = new HookRunner();
+  const responseCode = await runner.run(tempRepoPath, 'pre-commit', []);
+
+  // Assert
+  expect(responseCode).toEqual(0);
+  expect(global.console.log).toBeCalledWith(config);
+});

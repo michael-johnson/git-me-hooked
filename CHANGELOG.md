@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+* Support for passing config to individual scripts from the GMH config files via temporary JSON file exposed through the `GMH_SCRIPT_CONFIG_PATH` environment variable.
 
 ### Changed
 * Updated the default pre-commit hook to give a short message on how to edit the hook configuration.
