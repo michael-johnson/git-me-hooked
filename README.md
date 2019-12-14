@@ -12,7 +12,7 @@ A changelog is maintained for this project and is available [here](https://gitla
 
 * `Node` >= 8
 * `npm` and it's globally installed packages in your PATH.
-* `git` (duh)
+* `git` >= 2.0.0 (duh)
 
 
 ## Usage
@@ -50,7 +50,9 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
         "pre-commit": [
             {
                 "name": "Say hiya",
-                "exec": "echo \"hiya\""
+                "silenced": true,
+                "exec": "echo \"hiya\"",
+                "config": { optionA: true }
             }
         ]
     }
@@ -67,6 +69,7 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
 
 * A non-zero exit status in any of the scripts for a hook will abort the git action (if possible).
 * Output to stdout and stderr is not silenced by default, but can be by adding `silence: true` to the hook's entry in the `scripts` config.
+* Per script configuration may be passed via the `config` key on any given script command (assuming the given script reads it).
 * Paths in configuration files are always executed relative to the config files path. 
 * Hook script arguments are not guaranteed to be in the same position as if the script was called directly by git. Prefer using `GMH_GIT_ARGUMENTS` to retrieve arguments from git.
 
@@ -79,6 +82,7 @@ A handful of environment variables are populated by the hook runner to make writ
 * `GMH_RUNNING`: this is a simple flag that contains the string 'true' that is set anytime git-me-hooked is executing a git hook.
 * `GMH_GIT_ARGUMENTS`: contains a list of space separated arguments that git called the hook with.
 * `GMH_REPO_DIRECTORY`: a path that points to the root of the repo that the hook is currently being executed for.
+* `GMH_SCRIPT_CONFIG_PATH`: contains the path of a JSON file with the contents of the `config` field for the command executing the current script.
 
 #### Pre-commit
 

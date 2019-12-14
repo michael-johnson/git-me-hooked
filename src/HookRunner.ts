@@ -1,16 +1,10 @@
-import {
-  readFileSync,
-  mkdirSync,
-  existsSync,
-  readdirSync,
-  unlinkSync,
-} from 'fs';
+import { readFileSync } from 'fs';
 import { join, parse, resolve } from 'path';
 import { exec } from 'shelljs';
 import { chdir } from 'process';
 import ora from 'ora';
 import HookVariableInitializer from './HookVariableInitializer';
-import HookManager from './HookManager';
+import TempDirectory from './TempDirectory';
 
 export default class HookRunner {
   protected commands: ExecConfig = {};
@@ -19,7 +13,7 @@ export default class HookRunner {
     let responseCode = 0;
     this.commands = {};
 
-    HookRunner.initTempDirectory();
+    TempDirectory.init();
     HookVariableInitializer.initEnvVariables(repoPath, hookType, hookArguments);
 
     const repoConfig = HookRunner.readConfigFile(join(repoPath, 'git-me-hooked.json'));
@@ -56,13 +50,14 @@ export default class HookRunner {
       spinner.fail(`Git Me Hooked: one or more ${hookType} hooks failed.`);
     }
 
-    HookRunner.cleanTempDirectory();
+    TempDirectory.remove();
 
     return responseCode;
   }
 
   protected static runCommand(command: Command): Promise<CommandResult> {
     return new Promise(resolvePromise => {
+      HookVariableInitializer.initScriptConfig(command);
       exec(command.exec, { silent: true, async: true }, (code, stdout, stderr) => {
         let output = '';
         if (!command.silence) {
@@ -83,22 +78,6 @@ export default class HookRunner {
     });
   }
 
-  protected static initTempDirectory(): void {
-    if (!existsSync(HookManager.getTempDirectory())) {
-      mkdirSync(HookManager.getTempDirectory());
-    }
-  }
-
-  protected static cleanTempDirectory(): void {
-    const tempDirectory = HookManager.getTempDirectory();
-    if (existsSync(tempDirectory)) {
-      const files = readdirSync(tempDirectory);
-      files.forEach(file => {
-        unlinkSync(join(tempDirectory, file));
-      });
-    }
-  }
-
   protected getIncludes(repoConfig: GitMeHookedConfig, currentPath: string, hookType: string) {
     const { includes, scripts } = repoConfig;
     chdir(currentPath);
@@ -106,7 +85,8 @@ export default class HookRunner {
     if (scripts != null) {
       const commands = scripts[hookType];
       if (commands != null) {
-        this.commands[currentPath] = commands;
+        const commandsInPath = this.commands[currentPath] || [];
+        this.commands[currentPath] = [...commandsInPath, ...commands];
       }
     }
 
