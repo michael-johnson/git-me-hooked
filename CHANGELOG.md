@@ -7,14 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-* Support for passing config to individual scripts from the GMH config files via temporary JSON file exposed through the `GMH_SCRIPT_CONFIG_PATH` environment variable.
 
 ### Changed
-* Updated the default pre-commit hook to give a short message on how to edit the hook configuration.
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+### Security
+
+
+## [0.6.0] 2019-12-14
+
+### Added
+* Support for passing config to individual scripts from the GMH config files via temporary JSON file exposed through the `GMH_SCRIPT_CONFIG_PATH` environment variable.
+
+### Changed
+* Updated the default pre-commit hook to give a short message on how to edit the hook configuration.
 
 ### Fixed
 * The `GMH_STAGED_FILES` environment variable containing the path to the repo instead of an empty array if no files are staged.
