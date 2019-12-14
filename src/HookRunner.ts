@@ -57,6 +57,7 @@ export default class HookRunner {
 
   protected static runCommand(command: Command): Promise<CommandResult> {
     return new Promise(resolvePromise => {
+      HookVariableInitializer.initScriptConfig(command);
       exec(command.exec, { silent: true, async: true }, (code, stdout, stderr) => {
         let output = '';
         if (!command.silence) {

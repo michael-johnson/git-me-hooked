@@ -19,6 +19,13 @@ export default class HookVariableInitializer {
     }
   }
 
+  public static initScriptConfig(command: Command) {
+    const commandConfigPath = join(TempDirectory.getPath(), 'command-config.json');
+    writeFileSync(commandConfigPath, JSON.stringify(command.config || {}));
+
+    env.GMH_SCRIPT_CONFIG_PATH = commandConfigPath;
+  }
+
   protected static initPreCommitVars() {
     const stagedFilesPath = join(TempDirectory.getPath(), 'staged-files.json');
     writeFileSync(stagedFilesPath, HookVariableInitializer.getStagedFilesJson());
