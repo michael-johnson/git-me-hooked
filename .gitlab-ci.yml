@@ -8,7 +8,7 @@ default:
     - npm ci
 
 Audit:
-  script: npm audit
+  script: npm audit --production
 
 Lint:
   script: npm run lint
