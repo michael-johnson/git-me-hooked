@@ -52,7 +52,10 @@ A `git-me-hooked.json` file is created in the repository's top directory that de
                 "name": "Say hiya",
                 "silenced": true,
                 "exec": "echo \"hiya\"",
-                "config": { optionA: true }
+                "config": {
+                    "optionA": true,
+                    "optionB": "Whatever you want, as long as it's JSON"
+                }
             }
         ]
     }
