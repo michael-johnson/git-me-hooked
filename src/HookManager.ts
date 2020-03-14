@@ -12,9 +12,22 @@ import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from './strings/errors';
 
 export default class HookManager {
   protected static hookTypes = [
+    'applypatch-msg',
+    'commit-msg',
+    'post-applypatch',
+    'post-checkout',
+    'post-commit',
+    'post-merge',
+    'post-receive',
+    'post-rewrite',
+    'pre-applypatch',
+    'pre-auto-gc',
     'pre-commit',
     'pre-push',
-    'commit-msg',
+    'pre-rebase',
+    'pre-receive',
+    'prepare-commit-msg',
+    'update',
   ];
 
   public static init(repoPath: string): void {
