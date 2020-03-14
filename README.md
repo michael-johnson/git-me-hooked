@@ -7,21 +7,36 @@ Manage your git hooks in a language and repository agnostic manner.
 
 A changelog is maintained for this project and is available [here](https://gitlab.com/michael-johnson/git-me-hooked/blob/develop/CHANGELOG.md).
 
+## Installation
 
-## Requirements
+This utility is available as a global npm package and as standalone binaries for Windows, MacOS, and Linux. The former is the preferred installation method, but the latter may be used if you don't have access to node, or don't want to install it for one utility.
+
+### NPM Package
+
+Requirements:
 
 * `Node` >= 8
-* `npm` and it's globally installed packages in your PATH.
+* `npm` and its globally installed packages in your PATH.
 * `git` >= 2.0.0 (duh)
-
-
-## Usage
 
 Install the package globally:
 
 ```bash
 npm i -g git-me-hooked
 ```
+
+### Standalone
+
+Requirements:
+
+* 64 bit Windows, MacOS, or Linux
+* `git` >= 2.0.0 (duh)
+
+Download the executable for your platform from the [releases](https://gitlab.com/michael-johnson/git-me-hooked/-/releases) page.
+
+Place the executable file in a location in your PATH.
+
+## Usage
 
 Initialize a repository to use the hook manager:
 
@@ -35,7 +50,6 @@ Use git and enjoy
 ## Limitations
 
 * It is not possible to use `git-me-hooked` in conjunction with git hooks not executed by `git-me-hooked`. Any existing git hooks are backed up on `init` and are restored on `uninstall`.
-* Currently the only supported hook types are `pre-commit`, `commit-msg`, and `pre-push`. More will be added as development continues.
 
 
 ## Configuration
