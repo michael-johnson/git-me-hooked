@@ -7,7 +7,7 @@ import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from '../strings/errors';
 import TempDirectory from '../TempDirectory';
 
 const tempRepoPath = join(tmpdir(), 'gmh-test-repo');
-const hookTemplatePath = join(__dirname, '../../hookTemplate.sh');
+const hookTemplatePath = join(__dirname, '../../templates/hookTemplate.sh');
 
 jest.spyOn(global.console, 'log').mockImplementation(() => {});
 

@@ -59,8 +59,7 @@
   },
   "pkg": {
     "assets": [
-      "ConfigTemplates/**",
-      "hookTemplate.sh"
+      "templates/**"
     ],
     "scripts": [
       "dist/**"

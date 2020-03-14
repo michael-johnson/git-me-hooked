@@ -66,13 +66,13 @@ export default class HookManager {
 
     const localConfigFile = resolve(join(repoPath, 'git-me-hooked.json'));
     if (!existsSync(localConfigFile)) {
-      const configTemplate = readFileSync(join(__dirname, '/../ConfigTemplates/', 'local.json'), { encoding: 'utf-8' });
+      const configTemplate = readFileSync(join(__dirname, '/../templates/', 'configTemplate.json'), { encoding: 'utf-8' });
       writeFileSync(localConfigFile, configTemplate);
     }
   }
 
   private static getHookTemplate() {
-    const hookTemplatePath = join(__dirname, '../hookTemplate.sh');
+    const hookTemplatePath = join(__dirname, '../templates/hookTemplate.sh');
     const hookTemplate = readFileSync(hookTemplatePath, { encoding: 'utf-8' });
 
     return hookTemplate;
