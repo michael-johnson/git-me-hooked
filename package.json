@@ -11,7 +11,8 @@
   "scripts": {
     "test": "jest --run-in-band --silent",
     "build": "tsc -p .",
-    "lint": "eslint --ext .js,.ts ./src"
+    "lint": "eslint --ext .js,.ts ./src",
+    "package": "pkg --targets node12 ."
   },
   "keywords": [
     "hook",
@@ -46,6 +47,7 @@
     "eslint-plugin-jest": "^22.15.1",
     "husky": "^2.4.1",
     "jest": "^24.9.0",
+    "pkg": "^4.4.4",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.2"
@@ -54,5 +56,14 @@
     "commander": "^2.20.0",
     "ora": "^3.4.0",
     "shelljs": "^0.8.3"
+  },
+  "pkg": {
+    "assets": [
+      "ConfigTemplates/**",
+      "hookTemplate.sh"
+    ],
+    "scripts": [
+      "dist/**"
+    ]
   }
 }
