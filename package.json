@@ -9,10 +9,14 @@
   ],
   "bin": "./dist/app.js",
   "scripts": {
-    "test": "jest --run-in-band --silent",
-    "build": "tsc -p .",
     "lint": "eslint --ext .js,.ts ./src",
-    "package": "pkg --targets node12 ."
+    "test": "jest --run-in-band --silent",
+    "compile": "tsc -p .",
+    "package": "npm run package:windows && npm run package:mac && npm run package:linux",
+    "package:windows": "pkg --targets node12-windows-x64 . --output ./bin/windows/git-me-hooked",
+    "package:mac": "pkg --targets node12-macos-x64 . --output ./bin/mac/git-me-hooked",
+    "package:linux": "pkg --targets node12-linux-x64 . --output ./bin/linux/git-me-hooked",
+    "build": "npm run compile && npm run package"
   },
   "keywords": [
     "hook",
