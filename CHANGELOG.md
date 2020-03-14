@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
+* The default pre-commit message script has a name now so the message isn't doubled in the hook's output.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+* Grammar in the the default pre-commit message.
 
 ### Security
 
