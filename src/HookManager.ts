@@ -1,6 +1,5 @@
 import {
   existsSync,
-  copyFileSync,
   renameSync,
   unlinkSync,
   readFileSync,
@@ -12,9 +11,22 @@ import { ERROR_NOT_GIT_REPO, ERROR_NOT_INITIALIZED } from './strings/errors';
 
 export default class HookManager {
   protected static hookTypes = [
+    'applypatch-msg',
+    'commit-msg',
+    'post-applypatch',
+    'post-checkout',
+    'post-commit',
+    'post-merge',
+    'post-receive',
+    'post-rewrite',
+    'pre-applypatch',
+    'pre-auto-gc',
     'pre-commit',
     'pre-push',
-    'commit-msg',
+    'pre-rebase',
+    'pre-receive',
+    'prepare-commit-msg',
+    'update',
   ];
 
   public static init(repoPath: string): void {
@@ -54,18 +66,13 @@ export default class HookManager {
 
     const localConfigFile = resolve(join(repoPath, 'git-me-hooked.json'));
     if (!existsSync(localConfigFile)) {
-      copyFileSync(join(__dirname, '/../ConfigTemplates/', 'local.json'), localConfigFile);
+      const configTemplate = readFileSync(join(__dirname, '/../templates/', 'configTemplate.json'), { encoding: 'utf-8' });
+      writeFileSync(localConfigFile, configTemplate);
     }
   }
 
   private static getHookTemplate() {
-    let hookTemplatePath;
-    /* istanbul ignore if: The tests execute .ts files not .js */
-    if (existsSync(join(__dirname, 'hookTemplate.js'))) {
-      hookTemplatePath = join(__dirname, 'hookTemplate.js');
-    } else {
-      hookTemplatePath = join(__dirname, 'hookTemplate.ts'); // Tests only
-    }
+    const hookTemplatePath = join(__dirname, '../templates/hookTemplate.sh');
     const hookTemplate = readFileSync(hookTemplatePath, { encoding: 'utf-8' });
 
     return hookTemplate;
