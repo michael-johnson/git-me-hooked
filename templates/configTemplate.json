@@ -2,7 +2,8 @@
     "scripts": {
         "pre-commit": [
             {
-                "exec": "echo \"Git Me Hooked is installed, but no scripts are to configured to be executed on pre-commit. Edit git-me-hooked.json to configure your commit hooks.\""
+                "name": "Git-Me-Hooked Welcome",
+                "exec": "echo \"Git Me Hooked is installed, but no scripts are configured to be executed. Edit git-me-hooked.json to configure your commit hooks.\""
             }
         ]
     }
