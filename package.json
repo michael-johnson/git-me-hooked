@@ -9,9 +9,14 @@
   ],
   "bin": "./dist/app.js",
   "scripts": {
+    "lint": "eslint --ext .js,.ts ./src",
     "test": "jest --run-in-band --silent",
-    "build": "tsc -p .",
-    "lint": "eslint --ext .js,.ts ./src"
+    "compile": "tsc -p .",
+    "package": "npm run package:windows && npm run package:mac && npm run package:linux",
+    "package:windows": "pkg --targets node12-windows-x64 . --output ./bin/windows/git-me-hooked",
+    "package:mac": "pkg --targets node12-macos-x64 . --output ./bin/mac/git-me-hooked",
+    "package:linux": "pkg --targets node12-linux-x64 . --output ./bin/linux/git-me-hooked",
+    "build": "npm run compile && npm run package"
   },
   "keywords": [
     "hook",
@@ -46,6 +51,7 @@
     "eslint-plugin-jest": "^22.15.1",
     "husky": "^2.4.1",
     "jest": "^24.9.0",
+    "pkg": "^4.4.4",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.2"
@@ -54,5 +60,13 @@
     "commander": "^2.20.0",
     "ora": "^3.4.0",
     "shelljs": "^0.8.3"
+  },
+  "pkg": {
+    "assets": [
+      "templates/**"
+    ],
+    "scripts": [
+      "dist/**"
+    ]
   }
 }
