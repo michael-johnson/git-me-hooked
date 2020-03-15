@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+* Support for all of the remaining hook types (client and server-side).
+* Standalone binaries for Windows, MacOS, and Linux using pkg.
 
 ### Changed
-* The default pre-commit message script has a name now so the message isn't doubled in the hook's output.
+* NPM audit is run against production dependencies and no longer includes dev dependencies.
 
 ### Deprecated
 
@@ -17,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 * Grammar in the the default pre-commit message.
+* Bad syntax in the example git-me-hooked.json in the README.
+* The default pre-commit message script has a name now so the message isn't doubled in the hook's output.
 
 ### Security
 
