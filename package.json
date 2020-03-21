@@ -4,7 +4,7 @@
   "author": "Michael A. Johnson <johnson.michael.andrew+npm@gmail.com>",
   "version": "1.0.0",
   "files": [
-    "ConfigTemplates/*",
+    "templates/*",
     "dist/*"
   ],
   "bin": "./dist/app.js",
