@@ -15,9 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
-* Crash in init/install command for the NPM package variant caused by required files not being included in the package contents.
 
 ### Security
+
+
+## [1.0.1] 2020-03-21
+
+### Fixed
+* Crash in init/install command for the NPM package variant caused by required files not being included in the package contents.
 
 
 ## [1.0.0] 2020-03-15
